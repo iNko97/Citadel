@@ -14,10 +14,7 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.command.CommandSender;
@@ -711,6 +708,10 @@ public class Utility {
                 if (player.isDead()) {
                     continue;
                 }
+                //Ignore admins spectating and inadvertely allowing redstone to trigger
+                if(player.hasPermission("citadel.admin") && player.getGameMode().equals(GameMode.SPECTATOR)){
+                	continue;
+				}
                 Location playerLocation = player.getLocation();
                 double player_x = playerLocation.getX();
                 double player_z = playerLocation.getZ();
